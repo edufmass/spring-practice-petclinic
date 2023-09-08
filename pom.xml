@@ -8,12 +8,14 @@
         <version>3.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>ar.net.edufmass</groupId>
     <artifactId>springpetclinic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>springpetclinic</name>
     <description>springpetclinic</description>
+
     <modules>
         <module>pet-clinic-web</module>
         <module>pet-clinic-data</module>
@@ -39,7 +41,19 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>install</goals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <scm>
+        <developerConnection>scm:git:git@git-edufmass:edufmass/spring-practice-petclinic.git</developerConnection>
+    </scm>
 
 </project>
