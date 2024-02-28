@@ -8,12 +8,12 @@
     <!--/*@thymesVar id="owner" type="ar.net.edufmass.springpetclinic.model.Owner"*/-->
     <h2>Owners</h2>
 
-    <table  class="table table-striped">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th style="width: 150px;">ID</th>
-          <th style="width: 200px;">First name</th>
           <th>City</th>
+          <th style="width: 200px;">First name</th>
           <th style="width: 120px">Last name</th>
           <th>Pets</th>
         </tr>
@@ -21,8 +21,8 @@
       <tbody>
         <tr th:each="owner : ${owners}">
           <td th:text="${owner?.getId()}"></td>
-          <td th:text="${owner?.getFirstName()}"></td>
           <td></td>
+          <td th:text="${owner?.getFirstName()}"></td>
           <td th:text="${owner?.getLastName()}"></td>
           <td></td>
         </tr>
