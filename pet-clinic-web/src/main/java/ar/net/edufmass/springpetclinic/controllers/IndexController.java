@@ -12,4 +12,10 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping({"/oups"})
+    public String notYet(Model model) {
+
+        return "notimplemented";
+    }
+
 }
