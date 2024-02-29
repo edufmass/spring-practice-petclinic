@@ -1,6 +1,7 @@
 package ar.net.edufmass.springpetclinic.bootstrap;
 
 import ar.net.edufmass.springpetclinic.model.Owner;
+import ar.net.edufmass.springpetclinic.model.Pet;
 import ar.net.edufmass.springpetclinic.model.PetType;
 import ar.net.edufmass.springpetclinic.model.Vet;
 import ar.net.edufmass.springpetclinic.services.OwnerService;
@@ -10,6 +11,8 @@ import ar.net.edufmass.springpetclinic.services.map.OwnerServiceMap;
 import ar.net.edufmass.springpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -40,11 +43,42 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("John");
         owner1.setLastName("Doe");
+        owner1.setAddress("123 Some Street");
+        owner1.setCity("Spring City");
+        owner1.setTelephone("123123123");
+
+        Pet owner1pet1 = new Pet();
+        owner1pet1.setName("Loki");
+        owner1pet1.setPetType(savedDogPetType);
+        owner1pet1.setOwner(owner1);
+        owner1pet1.setBirthDate(LocalDate.now());
+
+        owner1.getPets().add(owner1pet1);
+
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Mary");
         owner2.setLastName("Major");
+        owner2.setAddress("456 Other Street");
+        owner2.setCity("Spring City");
+        owner2.setTelephone("111222333");
+
+        Pet owner2pet1 = new Pet();
+        owner2pet1.setName("Milo");
+        owner2pet1.setPetType(savedCatPetType);
+        owner2pet1.setOwner(owner2);
+        owner2pet1.setBirthDate(LocalDate.now());
+
+        Pet owner2pet2 = new Pet();
+        owner2pet2.setName("Luna");
+        owner2pet2.setPetType(savedCatPetType);
+        owner2pet2.setOwner(owner2);
+        owner2pet2.setBirthDate(LocalDate.now());
+
+        owner2.getPets().add(owner2pet1);
+        owner2.getPets().add(owner2pet2);
+
         ownerService.save(owner2);
 
         System.out.println("Loaded Owners... ");
