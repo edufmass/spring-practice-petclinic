@@ -1,14 +1,10 @@
 package ar.net.edufmass.springpetclinic.bootstrap;
 
-import ar.net.edufmass.springpetclinic.model.Owner;
-import ar.net.edufmass.springpetclinic.model.Pet;
-import ar.net.edufmass.springpetclinic.model.PetType;
-import ar.net.edufmass.springpetclinic.model.Vet;
+import ar.net.edufmass.springpetclinic.model.*;
 import ar.net.edufmass.springpetclinic.services.OwnerService;
 import ar.net.edufmass.springpetclinic.services.PetTypeService;
+import ar.net.edufmass.springpetclinic.services.SpecialtyService;
 import ar.net.edufmass.springpetclinic.services.VetService;
-import ar.net.edufmass.springpetclinic.services.map.OwnerServiceMap;
-import ar.net.edufmass.springpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -20,16 +16,25 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialtyService specialtyService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialtyService = specialtyService;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
+        int count = petTypeService.findAll().size();
+        if(count == 0) {
+            loadData();
+        }
+    }
+
+    private void loadData() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -83,14 +88,31 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded Owners... ");
 
+        Specialty spec1 = new Specialty();
+        spec1.setDescription("Radiology");
+        Specialty savedSpec1 = specialtyService.save(spec1);
+
+        Specialty spec2 = new Specialty();
+        spec2.setDescription("Surgery");
+        Specialty savedSpec2 = specialtyService.save(spec2);
+
+        Specialty spec3 = new Specialty();
+        spec3.setDescription("Dentistry");
+        Specialty savedSpec3 = specialtyService.save(spec3);
+
+        System.out.println("Loaded Specialties... ");
+
         Vet vet1 = new Vet();
         vet1.setFirstName("Jane");
         vet1.setLastName("Roe");
+        vet1.getSpecialties().add(spec1);
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Richard");
         vet2.setLastName("Miles");
+        vet2.getSpecialties().add(spec2);
+        vet2.getSpecialties().add(spec3);
         vetService.save(vet2);
 
         System.out.println("Loaded Vets... ");
