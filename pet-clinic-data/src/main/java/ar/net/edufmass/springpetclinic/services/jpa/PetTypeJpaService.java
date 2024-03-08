@@ -1,9 +1,7 @@
 package ar.net.edufmass.springpetclinic.services.jpa;
 
-import ar.net.edufmass.springpetclinic.model.Pet;
 import ar.net.edufmass.springpetclinic.model.PetType;
 import ar.net.edufmass.springpetclinic.repositories.PetTypeRepository;
-import ar.net.edufmass.springpetclinic.services.PetService;
 import ar.net.edufmass.springpetclinic.services.PetTypeService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -13,11 +11,11 @@ import java.util.Set;
 
 @Service
 @Profile("springdatajpa")
-public class PetTypeServiceJpa implements PetTypeService {
+public class PetTypeJpaService implements PetTypeService {
 
     private final PetTypeRepository petTypeRepository;
 
-    public PetTypeServiceJpa(PetTypeRepository petTypeRepository) {
+    public PetTypeJpaService(PetTypeRepository petTypeRepository) {
         this.petTypeRepository = petTypeRepository;
     }
 
