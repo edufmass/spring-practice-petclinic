@@ -1,10 +1,15 @@
 package ar.net.edufmass.springpetclinic.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Vets")
 public class Vet extends Person {
@@ -15,11 +20,4 @@ public class Vet extends Person {
         inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<>();
 
-    public Set<Specialty> getSpecialties() {
-        return specialties;
-    }
-
-    public void setSpecialties(Set<Specialty> specialties) {
-        this.specialties = specialties;
-    }
 }
