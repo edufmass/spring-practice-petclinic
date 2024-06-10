@@ -2,6 +2,8 @@ package ar.net.edufmass.springpetclinic.services.jpa;
 
 import ar.net.edufmass.springpetclinic.model.Owner;
 import ar.net.edufmass.springpetclinic.repositories.OwnerRepository;
+import ar.net.edufmass.springpetclinic.repositories.PetRepository;
+import ar.net.edufmass.springpetclinic.repositories.PetTypeRepository;
 import ar.net.edufmass.springpetclinic.services.OwnerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,13 @@ import java.util.Set;
 public class OwnerJpaService implements OwnerService {
 
     private final OwnerRepository ownerRepository;
+    private final PetRepository petRepository;
+    private final PetTypeRepository petTypeRepository;
 
-    public OwnerJpaService(OwnerRepository ownerRepository) {
+    public OwnerJpaService(OwnerRepository ownerRepository, PetRepository petRepository, PetTypeRepository petTypeRepository) {
         this.ownerRepository = ownerRepository;
+        this.petRepository = petRepository;
+        this.petTypeRepository = petTypeRepository;
     }
 
     @Override
